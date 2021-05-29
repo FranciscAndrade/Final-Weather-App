@@ -24,23 +24,29 @@ function formatDate(timestamp) {
 function displayTemperature (response) 
 {
     console.log(response.data);
-    console.log(response.data.main.temp)
     let temperatureElement = document.querySelector("#temperature");
     let cityElement = document.querySelector("#city");
     let description = document.querySelector("#description");
     let humidity = document.querySelector("#humidity");
     let windElement = document.querySelector("#wind");
-    let dateElement = document.querySelector("#date")
+    let dateElement = document.querySelector("#date");
+    let iconElement = document.querySelector("#icon")
     temperatureElement.innerHTML = Math.round (response.data.main.temp);
     cityElement.innerHTML = response.data.name;
     description.innerHTML = response.data.weather[0].description;
     humidity.innerHTML = response.data.main.humidity;
     wind.innerHTML = Math.round (response.data.wind.speed);
     dateElement.innerHTML = formatDate(response.data.dt * 1000);
+     iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 let apiKey = "3ae08bc66561a3f101f2a9b8b4f158c4";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+let city = "Porto";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 console.log(apiUrl);
 axios.get(apiUrl).then(displayTemperature);
