@@ -4,10 +4,14 @@ function formatDate(timestamp) {
    if (hours < 10) {
     hours = `0${hours}`;
   }
+
+  
    let minutes = date.getMinutes();
    if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+
+
    let days = ["Sunday",
     "Monday",
     "Tuesday",
@@ -18,8 +22,8 @@ function formatDate(timestamp) {
 
    let day = days[date.getDay()];
    return `${day}:${hours}:${minutes}`;
-
 }
+
 
 function displayTemperature (response) 
 {
@@ -33,10 +37,7 @@ function displayTemperature (response)
 
 
 
-celsiusTemperature = response.data.main.temp;
-
-
-
+    celsiusTemperature = response.data.main.temp;
     temperatureElement.innerHTML = Math.round (celsiusTemperature);
     cityElement.innerHTML = response.data.name;
     description.innerHTML = response.data.weather[0].description;
@@ -50,6 +51,7 @@ celsiusTemperature = response.data.main.temp;
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
+
 function search(city) 
 {
 let apiKey = "3ae08bc66561a3f101f2a9b8b4f158c4";
@@ -58,14 +60,13 @@ axios.get(apiUrl).then(displayTemperature);
 }
 
 
-
 function handleSubmit(event) 
 {
 event.preventDefault();
 let cityInputElement = document.querySelector("#city-input");
 search(cityInputElement.value)
-
 }
+
 
 function displayFahrenheitTemperature(event) 
 {
